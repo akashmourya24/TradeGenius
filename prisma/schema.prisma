@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+
+}
+
+
+model User {
+  id        Int      @id @default(autoincrement())
+  fullName  String
+  phone     String   @unique
+  email     String   @unique
+  password  String
+  isPaid     Boolean  @default(false)
+  createdAt DateTime @default(now())
+  update     DateTime @default(now())
+  payments  Payment[]
+  favorites FavoriteMap[]
+  supports  Support[]
+}
+
+
+model Payment {
+  id         Int      @id @default(autoincrement())
+  amount     Int
+  status     Boolean
+  razorpayId String
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+  createdAt  DateTime @default(now())
+}
+
+model FavoriteMap {
+  id     Int    @id @default(autoincrement())
+  name   String
+  userId Int
+  user   User   @relation(fields: [userId], references: [id])
+  createdAt  DateTime @default(now())
+}
+
+model Support {
+  id     Int    @id @default(autoincrement())
+  name   String 
+  phone  String @unique
+  email  String @unique
+  message String
+  userId Int
+  user   User   @relation(fields: [userId], references: [id])
+  createdAt  DateTime @default(now())
+}
+
+
+model AppSetting {
+  id         Int    @id @default(autoincrement())
+  appName    String
+  appVersion String
+  update     Boolean
+  createdAt  DateTime @default(now())
+}

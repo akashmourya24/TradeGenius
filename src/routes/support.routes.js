@@ -1,10 +1,10 @@
-// // routes/support.routes.js
-// import { Router } from "express";
-// import * as support from "../controllers/support.controller.js";
-// import auth from "../middlewares/auth.middleware.js";
+// routes/support.routes.js
+import { Router } from "express";
+import * as support from "../controllers/support.controller.js";
+import auth from "../middlewares/auth.middleware.js";
 
-// const router = Router();
+const router = Router();
 
-// router.post("/support", auth, support.createSupport);
+router.post("/support/:id", auth, support.createSupportController);
 
-// export default router;
+export default router;

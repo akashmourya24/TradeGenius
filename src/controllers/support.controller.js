@@ -1,4 +1,4 @@
-// controllers/auth.controller.js
+// controllers/support.controller.js
 import { createSupport } from "../services/support.service.js";
 
 export const createSupportController = async (req, res) => {

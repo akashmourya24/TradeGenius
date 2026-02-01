@@ -11,6 +11,11 @@ import supportRoutes from "./routes/support.routes.js";
 
 const app = express();
 app.use(cors());
+
+// Webhook route needs raw body for signature verification
+app.use("/api/payment/webhook", express.raw({ type: "application/json" }));
+
+// All other routes use JSON parsing
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
